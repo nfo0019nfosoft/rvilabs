@@ -315,6 +315,7 @@ margin-top: 20px;
 
   .aboutText {
     padding: 25px;
+    text-align: justify;
   }
 
   .aboutText h3 {
@@ -331,7 +332,7 @@ margin-top: 20px;
   }
 
   .aboutUsDescription {
-    text-align: center;
+    text-align: justify;
     font-size: 15px;
   }
 }
@@ -481,7 +482,7 @@ margin-top: 20px;
 /* ===== MOBILE ===== */
 @media (max-width: 768px) {
   .section {
-    padding: 80px 20px;
+    padding: 40px 0px;
   }
 
   .title {
@@ -491,7 +492,7 @@ margin-top: 20px;
 
   .intro {
     font-size: 15px;
-    text-align: center;
+    text-align: justify;
     margin-bottom: 50px;
   }
 
@@ -517,7 +518,7 @@ margin-top: 20px;
   }
 
   .serviceContent {
-    width: 50%;
+    width: 90%;
     text-align: center;
   }
 
@@ -703,7 +704,7 @@ margin-top: 20px;
   }
 
   .storiesDesc {
-    text-align: center;
+    text-align: justify;
     font-size: 14px;
     margin-bottom: 40px;
   }
@@ -728,6 +729,7 @@ margin-top: 20px;
 
   .storyCard p {
     font-size: 13px;
+    text-align:justify ;
   }
 }
 
@@ -749,7 +751,7 @@ margin-top: 20px;
 /* ===== SECTION ===== */
 .strengthsSection {
   background: #111827;
-  padding: 120px 60px;
+  padding: 40px 60px;
   color: #fff;
 }
 
@@ -908,7 +910,7 @@ margin-top: 20px;
   }
 
   .strengthsDesc {
-    text-align: center;
+    text-align: justify;
     font-size: 14px;
     margin-bottom: 40px;
   }
@@ -933,6 +935,7 @@ margin-top: 20px;
 
   .strengthCard p {
     font-size: 13px;
+    text-align: justify;
   }
 }
 

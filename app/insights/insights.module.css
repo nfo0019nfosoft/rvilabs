@@ -109,22 +109,90 @@
 }
 
 /* RESPONSIVE */
+/* ================= MOBILE ================= */
 @media (max-width: 900px) {
+
+  .hero {
+    height: auto;
+    min-height: 100vh;
+    padding: 200px 20px 60px; /* 🔥 navbar space fix */
+  }
+
   .container {
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+
     text-align: center;
+   margin-top: 150px;
+    padding: 0;
+    gap: 30px;
+  }
+
+  .left {
+    max-width: 100%;
+  }
+
+  .left h1 {
+    font-size: clamp(2rem, 6vw, 2.4rem);
+    line-height: 1.2;
+  }
+
+  .left p {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .actions {
+    margin-top: 24px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    width: 100%;
+  }
+
+  .primaryBtn,
+  .secondaryBtn {
+    width: 100%;
+    text-align: center;
+    padding: 14px 0;
   }
 
   .canvasBox {
     display: none;
   }
 
-  .actions {
-    justify-content: center;
+  /* 🔥 background fix */
+  .bg {
+    object-position: center right;
+    filter: brightness(0.7);
   }
 }
 
+
+/* ================= SMALL MOBILE ================= */
+@media (max-width: 480px) {
+
+  .hero {
+    padding: 100px 16px 50px;
+  }
+
+  .left h1 {
+    font-size: 1.8rem;
+  }
+
+  .left p {
+    font-size: 0.95rem;
+  }
+
+  .primaryBtn,
+  .secondaryBtn {
+    font-size: 13px;
+    padding: 12px 0;
+  }
+}
 
 
 
@@ -466,31 +534,127 @@
 /* =========================
    MOBILE
 ========================= */
+/* =========================
+   MOBILE (PERFECT)
+========================= */
 @media (max-width: 900px) {
+
+  .futureSection {
+    padding: 60px 20px; /* 🔥 more breathing space */
+  }
+
   .futureContainer {
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
     text-align: center;
+    gap: 40px;
   }
 
   .futureContent {
     max-width: 100%;
   }
 
+  .futureLabel {
+    font-size: 12px;
+    margin-bottom: 8px;
+  }
+
+  .futureContent h2 {
+    font-size: clamp(1.8rem, 6vw, 2.2rem);
+    line-height: 1.3;
+  }
+
+  .futureContent p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  text-align: justify;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .futureBtnWrap {
+    margin-top: 24px;
+  }
+
+  .futureBtn {
+    width: 100%;
+    text-align: center;
+    padding: 14px 10px;
+  }
+
+  /* 🔥 VISUAL FIX */
   .futureVisual {
-    width: 280px;
-    height: 280px;
-    margin-top: 40px;
+    width: 240px;
+    height: 240px;
+    margin-top: 20px;
   }
 
   .futureIconOne,
   .futureIconTwo,
   .futureIconThree,
   .futureIconFour {
-    font-size: 40px;
+    font-size: 32px;
+    opacity: 0.9;
+  }
+
+  /* 🔥 reposition icons (center feel) */
+  .futureIconOne {
+    top: 20px;
+    right: 20px;
+  }
+
+  .futureIconTwo {
+    bottom: 20px;
+    left: 20px;
+  }
+
+  .futureIconThree {
+    bottom: 10px;
+    right: 30px;
+  }
+
+  .futureIconFour {
+    top: 40px;
+    left: 30px;
   }
 }
 
 
+/* =========================
+   SMALL MOBILE
+========================= */
+@media (max-width: 480px) {
+
+  .futureSection {
+    padding: 50px 16px;
+  }
+
+  .futureContent h2 {
+    font-size: 1.6rem;
+  }
+
+  .futureContent p {
+    font-size: 0.9rem;
+  }
+
+  .futureBtn {
+    font-size: 13px;
+  }
+
+  .futureVisual {
+    width: 200px;
+    height: 200px;
+  }
+
+  .futureIconOne,
+  .futureIconTwo,
+  .futureIconThree,
+  .futureIconFour {
+    font-size: 26px;
+  }
+}
 
 
 
@@ -640,50 +804,45 @@
     0 10px 25px rgba(59,130,246,0.4),
     0 0 20px rgba(6,182,212,0.3);
 }
-
 /* =========================
-   TABLET
+   TABLET (<=900px)
 ========================= */
 @media (max-width: 900px) {
+
+  .expertSimpleSection {
+    padding: 60px 20px; /* 🔥 more space */
+  }
+
   .expertSimpleContainer {
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
     text-align: center;
     gap: 40px;
-  }
-
-  .expertSimpleVisual {
-    width: 300px;
-    height: 300px;
-  }
-
-  .iconOne,
-  .iconTwo,
-  .iconThree,
-  .iconFour {
-    font-size: 45px;
   }
 
   .expertSimpleContent {
     max-width: 100%;
   }
 
-  .btnWrap {
-    display: flex;
-    justify-content: center;
+  .expertSimpleContent h2 {
+    font-size: clamp(1.8rem, 5vw, 2.2rem);
+    line-height: 1.3;
   }
-}
 
-/* =========================
-   MOBILE
-========================= */
-@media (max-width: 480px) {
-  .expertSimpleSection {
-    padding: 40px 16px;
+  .expertSimpleContent p {
+    font-size: 0.95rem;
+    text-align: justify;
+    line-height: 1.6;
+
+    max-width: 500px;
+    margin: 0 auto;
   }
 
   .expertSimpleVisual {
-    width: 240px;
-    height: 240px;
+    width: 260px;
+    height: 260px;
   }
 
   .iconOne,
@@ -693,28 +852,55 @@
     font-size: 36px;
   }
 
-  .expertSimpleContent h2 {
-    font-size: 1.8rem;
-  }
-
-  .expertSimpleContent p {
-    font-size: 0.95rem;
+  .btnWrap {
+    display: flex;
+    justify-content: center;
+    width: 100%;
   }
 
   .btn {
-    width: 100%;
+    width: 30%;
+    max-width: 280px;
     text-align: center;
-    padding: 12px 0;
+    padding: 14px 12px;
   }
 }
 
 
+/* =========================
+   SMALL MOBILE (<=480px)
+========================= */
+@media (max-width: 480px) {
 
+  .expertSimpleSection {
+    padding: 50px 16px;
+  }
 
+  .expertSimpleContent h2 {
+    font-size: 1.6rem;
+  }
 
+  .expertSimpleContent p {
+    font-size: 0.9rem;
+  }
 
+  .expertSimpleVisual {
+    width: 220px;
+    height: 220px;
+  }
 
+  .iconOne,
+  .iconTwo,
+  .iconThree,
+  .iconFour {
+    font-size: 28px;
+  }
 
+  .btn {
+    font-size: 13px;
+    padding: 12px 0;
+  }
+}
 
 
 
@@ -871,18 +1057,97 @@
 /* =========================
    MOBILE
 ========================= */
+/* =========================
+   MOBILE (<=768px)
+========================= */
 @media (max-width: 768px) {
-  .perspectiveGrid {
-    grid-template-columns: 1fr;
+
+  .perspectiveSection {
+    padding: 60px 20px; /* 🔥 remove 160px sides */
+  }
+
+  .perspectiveWrapper {
+    max-width: 100%;
   }
 
   .perspectiveHeader {
     text-align: center;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto 40px;
   }
 
+  .perspectiveHeader h2 {
+    font-size: clamp(1.8rem, 6vw, 2.2rem);
+    line-height: 1.3;
+  }
+
+  .perspectiveHeader p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+
+    text-align: justify;   /* 🔥 main requirement */
+    text-justify: inter-word;
+  }
+
+  /* GRID → SINGLE COLUMN */
+  .perspectiveGrid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  /* CARD */
+  .perspectiveCard {
+    padding: 22px;
+  }
+
+  .perspectiveCard h3 {
+    font-size: 1.05rem;
+  }
+
+  .perspectiveCard p {
+    font-size: 0.92rem;
+    line-height: 1.6;
+
+    text-align: justify;   /* 🔥 justify for cards also */
+    text-justify: inter-word;
+  }
+
+  /* BUTTON */
   .perspectiveBtnWrap {
     justify-content: center;
+    margin-top: 30px;
+  }
+
+  .perspectiveBtn {
+    width: 100%;
+    max-width: 280px;
+    text-align: center;
+    padding: 14px 0;
+  }
+}
+
+
+/* =========================
+   SMALL MOBILE (<=480px)
+========================= */
+@media (max-width: 480px) {
+
+  .perspectiveSection {
+    padding: 50px 16px;
+  }
+
+  .perspectiveHeader h2 {
+    font-size: 1.6rem;
+  }
+
+  .perspectiveHeader p {
+    font-size: 0.9rem;
+  }
+
+  .perspectiveCard p {
+    font-size: 0.88rem;
+  }
+
+  .perspectiveBtn {
+    font-size: 13px;
   }
 }

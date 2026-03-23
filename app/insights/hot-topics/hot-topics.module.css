@@ -310,6 +310,7 @@
 
   .grid {
     grid-template-columns: 1fr;
+    text-align: justify;
     gap: 20px;
   }
 

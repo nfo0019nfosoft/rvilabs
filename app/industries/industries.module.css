@@ -110,19 +110,89 @@
 }
 
 /* RESPONSIVE */
+/* ================= MOBILE ================= */
 @media (max-width: 900px) {
+
+  .hero {
+    height: auto;
+    min-height: 100vh;
+  }
+
   .container {
     flex-direction: column;
+    align-items: center;
     justify-content: center;
+
     text-align: center;
+
+    padding: 180px 20px 60px; /* 🔥 FIX (320 → 140) */
+    gap: 30px;
+  }
+
+  .left {
+    max-width: 100%;
+  }
+
+  .left h1 {
+    font-size: clamp(2rem, 6vw, 2.4rem);
+    line-height: 1.2;
+    margin-top: 120px;
+  }
+
+  .left p {
+    font-size: 1rem;
+    line-height: 1.6;
+    max-width: 100%;
+  }
+
+  .actions {
+    margin-top: 24px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    width: 100%;
+  }
+
+  .primaryBtn,
+  .secondaryBtn {
+    width: 100%;
+    text-align: center;
+    padding: 14px 0;
   }
 
   .canvasBox {
     display: none;
   }
 
-  .actions {
-    justify-content: center;
+  /* 🔥 background tuning */
+  .bg {
+    object-position: cover;
+    filter: brightness(0.7);
+  }
+}
+
+
+/* ================= SMALL MOBILE ================= */
+@media (max-width: 480px) {
+
+  .container {
+    padding: 120px 16px 50px;
+  }
+
+  .left h1 {
+    font-size: 1.8rem;
+  }
+
+  .left p {
+    font-size: 0.95rem;
+  }
+
+  .primaryBtn,
+  .secondaryBtn {
+    font-size: 13px;
+    padding: 12px 0;
   }
 }
 
@@ -133,8 +203,8 @@
 
 /* ================= SECTION ================= */
 .section {
-  background: #05070d;
-  padding: 80px 20px;
+  background: #0f172a;
+  padding: 40px 20px;
   color: #fff;
 }
 
@@ -266,31 +336,127 @@
 /* ================= MOBILE ================= */
 @media (max-width: 768px) {
 
-  .heading {
-    font-size: 30px;
-    text-align: center;
+  .section {
+    padding: 60px 20px;
   }
 
+  .sectionContainer {
+    max-width: 100%;
+    overflow-x: hidden; /* 🔥 no horizontal scroll */
+  }
+
+  /* ===== HEADING ===== */
+  .heading {
+    font-size: 28px;
+    text-align: center;
+    line-height: 1.3;
+  }
+
+  /* ===== INTRO ===== */
   .intro {
     font-size: 14px;
-    text-align: center;
+    line-height: 1.6;
+
+    text-align: left; /* 🔥 no justify (fix cut issue) */
+
+    word-break: break-word;
+    overflow-wrap: break-word;
+
+    max-width: 100%;
+    margin-bottom: 50px;
+    padding: 0 8px;
   }
 
+  /* ===== LIST ===== */
+  .list {
+    gap: 50px;
+  }
+
+  /* ===== ITEM ===== */
   .item {
     flex-direction: column !important;
+    align-items: center;
     text-align: center;
-    transform: translateY(40px); /* reset animation */
+
+    gap: 20px;
+
+    transform: translateY(40px); /* animation reset */
   }
 
+  /* REMOVE LEFT/RIGHT SHIFT */
+  .item:nth-child(odd),
+  .item:nth-child(even) {
+    transform: translateY(40px) !important;
+    flex-direction: column !important;
+  }
+
+  /* ===== IMAGE ===== */
   .imageWrapper {
     width: 100%;
-  }
-
-  .content {
-    width: 100%;
+    justify-content: center;
   }
 
   .imageWrapper img {
     width: 140px;
+    height: auto;
+  }
+
+  /* ===== CONTENT ===== */
+  .content {
+    width: 100% !important;   /* 🔥 MAIN FIX */
+    max-width: 100%;
+
+    padding: 0 8px;           /* 🔥 prevent cut */
+  }
+
+  .content h3 {
+    font-size: 22px;
+  }
+
+  .content p {
+    font-size: 14px;
+    line-height: 1.6;
+
+    text-align: left; /* 🔥 FIX */
+
+    word-break: break-word;
+    overflow-wrap: break-word;
+
+    margin-bottom: 16px;
+  }
+
+  /* ===== BUTTON ===== */
+  .btn {
+    display: inline-block;
+    margin-top: 10px;
+  }
+}
+
+
+/* ================= SMALL MOBILE ================= */
+@media (max-width: 480px) {
+
+  .section {
+    padding: 50px 16px;
+  }
+
+  .heading {
+    font-size: 24px;
+  }
+
+  .intro {
+    font-size: 13px;
+  }
+
+  .content h3 {
+    font-size: 20px;
+  }
+
+  .content p {
+    font-size: 13px;
+  }
+
+  .imageWrapper img {
+    width: 120px;
   }
 }
