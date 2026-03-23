@@ -1,0 +1,159 @@
+/* ===== SITE FOOTER BASE ===== */
+.siteFooter {
+  background: #020617;
+  color: #E5E7EB;
+  padding: 80px 0 0;
+  font-family: system-ui, sans-serif;
+}
+
+/* ===== GRID SYSTEM ===== */
+.footerContainer {
+  max-width: 1300px;
+  margin: auto;
+  padding: 0 40px 60px;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr 1fr;
+  gap: 80px;
+}
+
+/* ===== HEADINGS ===== */
+.footerHeading {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 22px;
+  color: #ffffff;
+}
+
+/* ===== COLUMN TEXT ===== */
+.footerCol p {
+  font-size: 15px;
+  line-height: 1.8;
+  color: #9CA3AF;
+  max-width: 280px;
+  margin-bottom: 10px;
+}
+
+/* ===== LIST (FIXED ✅) ===== */
+.list {
+  list-style: none;
+  padding: 0;
+}
+
+.listItem {
+  margin-bottom: 12px;
+}
+
+.listLink {
+  position: relative;
+  color: #9CA3AF;
+  text-decoration: none;
+  font-size: 15px;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+/* ===== UNDERLINE HOVER ===== */
+.listLink::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background: #ffffff;
+  transition: width 0.3s ease;
+}
+
+.listLink:hover {
+  color: #ffffff;
+  transform: translateX(6px);
+}
+
+.listLink:hover::after {
+  width: 100%;
+}
+
+/* ===== SOCIAL SECTION ===== */
+.followTitle {
+  margin-top: 25px;
+}
+
+.footerSocial {
+  display: flex;
+  gap: 14px;
+  margin-top: 12px;
+}
+
+.footerSocial a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #111827;
+  color: #ffffff;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.footerSocial a:hover {
+  background: #3B82F6;
+  transform: translateY(-3px) scale(1.05);
+}
+
+/* ===== FOOTER BOTTOM ===== */
+.footerBottom {
+  text-align: center;
+  font-size: 14px;
+  color: #6B7280;
+  padding: 20px 0;
+  border-top: 1px solid #111827;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .footerContainer {
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+  }
+}
+
+@media (max-width: 640px) {
+  .siteFooter {
+    padding: 60px 0 0;
+  }
+
+  .footerContainer {
+    grid-template-columns: 1fr;
+    gap: 35px;
+    padding: 0 20px 40px;
+  }
+
+  .footerHeading {
+    font-size: 17px;
+  }
+
+  .footerCol p {
+    font-size: 14px;
+    max-width: 100%;
+  }
+
+  .listLink {
+    font-size: 14px;
+  }
+
+  .footerSocial {
+    justify-content: flex-start;
+  }
+
+  .footerSocial a {
+    width: 44px;
+    height: 44px;
+  }
+
+  .footerBottom {
+    font-size: 13px;
+    padding: 16px 10px;
+  }
+}

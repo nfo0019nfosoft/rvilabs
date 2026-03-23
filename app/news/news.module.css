@@ -1,0 +1,410 @@
+.hero {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background: #000;
+}
+
+/* Background Image */
+.heroImage {
+  object-fit: cover;
+  z-index: 0;
+}
+
+/* Overlay */
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+
+  background:
+    radial-gradient(
+      circle at right center,
+      rgba(31, 41, 55, 0.85) 0%,
+      rgba(17, 24, 39, 0.6) 30%,
+      rgba(15, 23, 42, 0.35) 50%,
+      transparent 70%
+    ),
+    linear-gradient(
+      90deg,
+      #020617 0%,
+      rgba(2, 6, 23, 0.95) 20%,
+      rgba(15, 23, 42, 0.85) 40%,
+      rgba(17, 24, 39, 0.7) 60%,
+      rgba(31, 41, 55, 0.4) 80%,
+      transparent 100%
+    );
+}
+
+/* Content */
+.heroContent {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  max-width: 1240px;
+  margin: auto;
+  padding: 150px 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.heroLeft {
+  max-width: 620px;
+}
+
+.heroLeft h1 {
+  font-size: clamp(2.8rem, 5vw, 4.2rem);
+  font-weight: 700;
+  margin-bottom: 10px;
+   font-family: 'Ubuntu Mono', monospace;
+}
+
+.subheading {
+  font-size: 1.3rem;
+  color: #94a3b8;
+  margin-bottom: 20px;
+}
+
+.heroLeft p {
+  font-size: 1.1rem;
+  color: #cbd5f5;
+    max-width: 500px; 
+  line-height: 1.7;
+}
+
+/* Buttons */
+.actions {
+  display: flex;
+  gap: 16px;
+  margin-top: 30px;
+}
+
+.btnPrimary {
+  padding: 14px 30px;
+  background: #3b82f6;
+  color: #fff;
+  border-radius: 999px;
+  text-decoration: none;
+}
+
+.btnSecondary {
+  padding: 14px 30px;
+  border: 1px solid rgba(255,255,255,0.4);
+  color: #fff;
+  border-radius: 999px;
+  text-decoration: none;
+}
+
+/* 3D */
+.hero3d {
+  width: 380px;
+  height: 380px;
+  pointer-events: none;
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 1024px) {
+  .heroContent {
+    padding: 140px 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    height: 85vh;
+  }
+
+  .heroContent {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 120px 20px 60px;
+  }
+
+  .heroLeft {
+    max-width: 100%;
+  }
+
+  .heroLeft h1 {
+    font-size: 2.2rem;
+  }
+
+  .subheading {
+    font-size: 1.1rem;
+  }
+
+  .heroLeft p {
+    font-size: 1rem;
+  }
+
+  .actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .btnPrimary,
+  .btnSecondary {
+    width: 100%;
+    text-align: center;
+  }
+
+  .hero3d {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    height: 70vh;
+  }
+
+  .heroLeft h1 {
+    font-size: 1.8rem;
+  }
+
+  .heroLeft p {
+    font-size: 0.95rem;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+/* ================= SECTION ================= */
+.newsSection {
+  background: #020617;
+  padding: 50px 20px;   /* 🔥 reduce side padding */
+  color: #fff;
+
+  display: flex;
+  justify-content: center;  /* 🔥 center horizontally */
+}
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+/* ================= HEADER ================= */
+.newsHeader {
+  max-width: 1200px;
+  margin-bottom: 60px;
+}
+
+.newsHeader h2 {
+  font-size: 2.8rem;
+  margin-bottom: 16px;
+  font-weight: 700; /* 🔥 bold */
+  color: #ffffff;
+}
+
+.newsHeader p {
+  color: #94a3b8;  /* ✅ fixed (not white) */
+  font-size: 18px;
+  line-height: 1.7;
+   max-width: 1000px;
+    text-align: justify;
+  
+}
+
+/* ================= FEATURED ================= */
+.featuredNews {
+  margin-bottom: 60px;
+}
+
+.featuredNews h3 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+/* Featured Card */
+.featuredCard {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 20px;
+  padding: 40px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.4s ease;
+}
+
+.featuredCard:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 20px 60px rgba(59, 130, 246, 0.15),
+    0 0 30px rgba(6, 182, 212, 0.15);
+}
+
+/* ================= GRID ================= */
+.newsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+/* ================= CARDS ================= */
+.card {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 16px;
+  padding: 28px;
+  transition: all 0.35s ease;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow:
+    0 15px 40px rgba(59, 130, 246, 0.2),
+    0 0 25px rgba(139, 92, 246, 0.2);
+}
+
+/* ================= TEXT ================= */
+.cardTitle {
+  font-size: 1.3rem;
+  margin: 10px 0;
+  color: #ffffff;
+  font-weight: 600; /* 🔥 bold titles */
+  letter-spacing: -0.3px;
+}
+
+.featuredCard .cardTitle {
+  font-size: 1.6rem;
+}
+
+.card p {
+  color: #94a3b8; /* ✅ consistent */
+  font-size: 15px;
+  line-height: 1.6;
+   text-align: justify;
+}
+
+.featuredCard p {
+  color: #cbd5f5; /* slightly brighter */
+}
+
+.date {
+  font-size: 0.8rem;
+  color: #60a5fa;
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+
+/* ================= TABLET ================= */
+@media (max-width: 1024px) {
+  .newsSection {
+    padding: 70px 40px;
+  }
+
+  .newsHeader h2 {
+    font-size: 2.4rem;
+  }
+
+  .featuredCard {
+    padding: 30px;
+  }
+
+  .card {
+    padding: 24px;
+  }
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 768px) {
+  .newsSection {
+    padding: 60px 20px;
+  }
+
+  .newsHeader {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .newsHeader h2 {
+    font-size: 2rem;
+  }
+
+  .newsHeader p {
+    font-size: 15px;
+     text-align: justify;
+    margin: auto;
+  }
+
+  .featuredNews h3 {
+    text-align: center;
+  }
+
+  .featuredCard {
+    padding: 24px;
+  }
+
+  .featuredCard .cardTitle {
+    font-size: 1.3rem;
+  }
+
+  .newsGrid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .card {
+    padding: 20px;
+  }
+
+  .cardTitle {
+    font-size: 1.15rem;
+  }
+
+  .card p {
+    font-size: 14px;
+     text-align: justify;
+  }
+}
+
+/* ================= SMALL MOBILE ================= */
+@media (max-width: 480px) {
+  .newsSection {
+    padding: 50px 16px;
+  }
+
+  .newsHeader h2 {
+    font-size: 1.8rem;
+  }
+
+  .newsHeader p {
+    font-size: 14px;
+     text-align: justify;
+  }
+
+  .featuredCard {
+    padding: 20px;
+  }
+
+  .featuredCard .cardTitle {
+    font-size: 1.2rem;
+  }
+
+  .card {
+    padding: 16px;
+  }
+
+  .cardTitle {
+    font-size: 1.05rem;
+  }
+
+  .card p {
+    font-size: 13px;
+     text-align: justify;
+  }
+
+  .date {
+    font-size: 0.7rem;
+  }
+}

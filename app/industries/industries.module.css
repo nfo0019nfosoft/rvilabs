@@ -1,0 +1,296 @@
+.hero {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background: #000;
+}
+
+/* Background */
+.bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+/* Overlay */
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+
+  background:
+    radial-gradient(
+      circle at right center,
+      rgba(31, 41, 55, 0.85) 0%,
+      rgba(17, 24, 39, 0.6) 30%,
+      rgba(15, 23, 42, 0.35) 50%,
+      transparent 70%
+    ),
+    linear-gradient(
+      90deg,
+      #020617 0%,
+      rgba(2,6,23,0.95) 25%,
+      rgba(15,23,42,0.85) 50%,
+      rgba(31,41,55,0.4) 75%,
+      transparent 100%
+    );
+}
+
+/* CENTER FIX */
+.container {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+
+  max-width: 1240px;
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 320px 80px;
+}
+
+/* LEFT */
+.left {
+  max-width: 600px;
+}
+
+.left h1 {
+  font-size: clamp(2.8rem, 5vw, 4rem);
+    font-family: 'Ubuntu Mono', monospace;
+
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.left p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  max-width: 500px;
+  opacity: 0.9;
+}
+
+/* BUTTONS */
+.actions {
+  margin-top: 30px;
+  display: flex;
+  gap: 16px;
+}
+
+.primaryBtn {
+  padding: 14px 28px;
+  border-radius: 999px;
+  background: #3b82f6;
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.secondaryBtn {
+  padding: 14px 28px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.4);
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+/* 3D */
+.canvasBox {
+  width: 400px;
+  height: 400px;
+  pointer-events: none;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .canvasBox {
+    display: none;
+  }
+
+  .actions {
+    justify-content: center;
+  }
+}
+
+
+
+
+
+
+/* ================= SECTION ================= */
+.section {
+  background: #05070d;
+  padding: 80px 20px;
+  color: #fff;
+}
+
+.sectionContainer {
+  max-width: 1100px;
+  margin: auto;
+}
+
+/* ================= TOP TEXT ================= */
+.heading {
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.intro {
+  color: #9aa4b2;
+  max-width: 1400px;
+  margin-bottom: 80px;
+  line-height: 1.7;
+  text-align: justify;
+}
+
+/* ================= LIST ================= */
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+}
+
+/* ================= ITEM ================= */
+.item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 40px;
+
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease;
+}
+
+/* LEFT animation */
+.item:nth-child(odd) {
+  transform: translateX(-80px);
+}
+
+/* RIGHT animation */
+.item:nth-child(even) {
+  transform: translateX(80px);
+  flex-direction: row-reverse;
+}
+
+/* SHOW */
+.show {
+  opacity: 1;
+  transform: translateX(0) translateY(0);
+}
+
+/* ================= IMAGE ================= */
+.imageWrapper {
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.imageWrapper img {
+  width: 200px;
+  height: auto;
+  object-fit: contain;
+  transition: transform 0.4s ease;
+}
+
+/* hover zoom */
+.item:hover .imageWrapper img {
+  transform: scale(1.1);
+}
+
+/* floating animation */
+.imageWrapper img {
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+/* ================= CONTENT ================= */
+.content {
+  width: 60%;
+}
+
+.content h3 {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.content p {
+  color: #9aa4b2;
+  text-align: justify;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+/* ================= BUTTON ================= */
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background: transparent;
+  border: 1px solid #3b82f6;
+  border-radius: 6px;
+  color: #3b82f6;
+  text-decoration: none;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background: #3b82f6;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 768px) {
+
+  .heading {
+    font-size: 30px;
+    text-align: center;
+  }
+
+  .intro {
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .item {
+    flex-direction: column !important;
+    text-align: center;
+    transform: translateY(40px); /* reset animation */
+  }
+
+  .imageWrapper {
+    width: 100%;
+  }
+
+  .content {
+    width: 100%;
+  }
+
+  .imageWrapper img {
+    width: 140px;
+  }
+}

@@ -1,0 +1,373 @@
+.hero {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  background: #020617;
+
+  display: flex;
+
+  align-items: flex-start; /* 🔥 important */
+  padding-top: 140px;      /* 🔥 increase for more down */
+
+  z-index: 0;
+}
+.heroContainer {
+  position: relative;
+  z-index: 2;
+}
+
+/* IMAGE */
+.heroImage {
+  object-fit: cover;
+  z-index: 0;
+}
+
+/* OVERLAY */
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+
+  background:
+    radial-gradient(
+      circle at right center,
+      rgba(31, 41, 55, 0.85),
+      transparent 70%
+    ),
+    linear-gradient(
+      90deg,
+      #020617,
+      rgba(2,6,23,0.9),
+      rgba(15,23,42,0.6),
+      transparent
+    );
+}
+
+/* CONTAINER (CENTER FIX 🔥) */
+.heroContainer{
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  z-index: 2;
+}
+
+/* CONTENT */
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* LEFT */
+.heroLeft {
+  max-width: 500px;
+  margin-left: 60px;
+}
+
+.heroLeft h1{
+  font-family: 'Ubuntu Mono', monospace;
+  font-size: clamp(2.8rem, 5vw, 4.2rem);
+  font-weight: 600;
+ 
+  margin-bottom: 20px;
+
+}
+
+.heroLeft h2 {
+  font-size: 1.2rem;
+  color: #cbd5f5;
+  line-height: 1.6;
+}
+
+/* BUTTONS */
+.actions {
+  margin-top: 30px;
+  display: flex;
+  gap: 16px;
+}
+
+.primary {
+  padding: 14px 28px;
+  background: #3b82f6;
+  border-radius: 999px;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+
+
+/* RIGHT */
+.heroRight {
+  width: 420px;
+  height: 420px;
+  filter:
+    drop-shadow(0 0 40px rgba(59,130,246,0.5))
+    drop-shadow(0 0 80px rgba(6,182,212,0.6));
+}
+
+/* ================= TABLET ================= */
+@media (max-width: 1024px) {
+  .heroRight{
+    width: 300px;
+    height: 300px;
+  }
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 768px) {
+
+  .hero {
+    height: auto;
+    padding: 80px 0;
+  }
+
+  .content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .heroLeft h1 {
+    font-size: 2.2rem;
+  }
+
+  .heroLeft h2 {
+    font-size: 1rem;
+  }
+
+  .actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .primary,
+  .secondary {
+    width: 100%;
+    text-align: center;
+  }
+
+  .heroRight {
+    margin-top: 40px;
+    width: 220px;
+    height: 220px;
+  }
+}
+
+/* ================= SMALL MOBILE ================= */
+@media (max-width: 480px) {
+  .heroLeft h1 {
+    font-size: 1.9rem;
+  }
+
+  .heroLeft h2 {
+    font-size: 0.95rem;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===== SECTION ===== */
+.section {
+  background: #111827;
+  padding: 50px 60px;
+  color: #fff;
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* TITLE */
+.title {
+  font-size: 48px;
+  margin-bottom: 20px;
+  font-family: "Ubuntu Mono", monospace;
+}
+
+.intro {
+  font-size: 17px;
+  line-height: 1.7;
+  opacity: 0.85;
+  margin-bottom: 80px;
+  max-width: 1200px;
+}
+
+/* ===== CARD ===== */
+.card {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  margin-bottom: 100px;
+
+  opacity: 0;
+  transform: translateX(-120px);
+  transition: all 0.8s ease;
+  will-change: transform, opacity;
+}
+
+/* RIGHT SIDE */
+.reverse {
+  flex-direction: row-reverse;
+  transform: translateX(120px);
+}
+
+/* SHOW ANIMATION */
+.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ===== IMAGE ===== */
+.image {
+  width: 50%;
+  height: 320px;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease, filter 0.6s ease;
+}
+
+/* HOVER EFFECT */
+.card:hover img {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+/* ===== CONTENT ===== */
+.serviceContent {
+  width: 50%;
+}
+
+.serviceContent h3 {
+  font-size: 30px;
+  margin-bottom: 15px;
+  font-family: "Ubuntu Mono", monospace;
+}
+
+.serviceContent p {
+  font-size: 16px;
+  line-height: 1.7;
+  text-align: justify;
+  opacity: 0.85;
+  margin-bottom: 20px;
+}
+
+/* BUTTON */
+.serviceBtn {
+  display: inline-block;
+  padding: 10px 24px;
+  background: #3b82f6;
+  border-radius: 999px;
+  color: #fff;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.serviceBtn:hover {
+  box-shadow: 0 5px 20px rgba(59, 130, 246, 0.6);
+  transform: translateY(-2px);
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+  .section {
+    padding: 80px 20px;
+  }
+
+  .title {
+    font-size: 32px;
+    text-align: center;
+  }
+
+  .intro {
+    font-size: 15px;
+    text-align: center;
+    margin-bottom: 50px;
+  }
+
+  .card {
+    flex-direction: column;
+    gap: 30px;
+    margin-bottom: 60px;
+
+    transform: translateY(60px);
+  }
+
+  .reverse {
+    flex-direction: column;
+  }
+
+  .show {
+    transform: translateY(0);
+  }
+
+  .image {
+    width: 100%;
+    height: 220px;
+  }
+
+  .serviceContent {
+    width: 50%;
+    text-align: center;
+  }
+
+  .serviceContent h3 {
+    font-size: 22px;
+  }
+
+  .serviceContent p {
+    font-size: 14px;
+  }
+
+  .serviceBtn {
+    padding: 8px 20px;
+    font-size: 13px;
+  }
+}
+
+/* SMALL MOBILE */
+@media (max-width: 480px) {
+  .image {
+    height: 180px;
+  }
+
+  .serviceContent h3 {
+    font-size: 18px;
+  }
+
+  .serviceContent p {
+    font-size: 13px;
+  }
+
+  .serviceBtn {
+    padding: 6px 16px;
+    font-size: 12px;
+  }
+}
+
+
+
+
