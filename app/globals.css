@@ -1,6 +1,9 @@
-/* Bootstrap Icons */
+/* ✅ IMPORTS FIRST (VERY IMPORTANT) */
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css");
-@import "tailwindcss";
+
+/* ✅ TAILWIND */
+
+
 /* RESET */
 * {
   margin: 0;
@@ -18,19 +21,19 @@
 body {
   background: var(--background);
   color: var(--foreground);
- 
 }
 
 /* PREVENT SCROLL BUG */
 html, body {
   overflow-x: hidden;
 }
+
 /* HEADINGS */
 h1 {
   font-family: var(--font-ubuntu), Arial, sans-serif;
 }
 
 /* BODY */
-body, p, input, textarea, button,h2,h3 {
+body, p, input, textarea, button, h2, h3 {
   font-family: Arial, Helvetica, sans-serif;
 }

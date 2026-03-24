@@ -1,0 +1,126 @@
+/* 🔥 Layout */
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #060b18;
+  color: #fff;
+  font-family: "Inter", sans-serif;
+}
+
+/* 🔥 Content */
+.content {
+  flex: 1;
+  padding: 30px;
+}
+
+/* 🔥 Heading */
+.content h1 {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+/* 🔥 Form */
+.form {
+  background: #0d1326;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border: 1px solid #1c2747;
+}
+
+.form input,
+.form textarea {
+  background: #060b18;
+  border: 1px solid #1c2747;
+  padding: 10px;
+  border-radius: 8px;
+  color: #fff;
+  outline: none;
+}
+
+.form input::placeholder,
+.form textarea::placeholder {
+  color: #888;
+}
+
+/* 🔥 Buttons */
+.btn {
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn.primary {
+  background: #2563eb;
+  color: #fff;
+}
+
+.btn.edit {
+  background: #22c55e;
+  color: #fff;
+}
+
+.btn.delete {
+  background: #ef4444;
+  color: #fff;
+}
+
+/* 🔥 Grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+/* 🔥 Card */
+.card {
+  background: #0d1326;
+  padding: 15px;
+  border-radius: 12px;
+  border: 1px solid #1c2747;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: #2563eb;
+}
+
+/* 🔥 Image */
+.blog-img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+/* 🔥 Card text */
+.card h3 {
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+
+.card p {
+  font-size: 14px;
+  color: #aaa;
+  margin-bottom: 10px;
+}
+
+/* 🔥 Buttons row */
+.btns {
+  display: flex;
+  gap: 10px;
+}
+
+/* 🔥 Loading */
+.loading {
+  color: white;
+  text-align: center;
+  padding: 50px;
+}

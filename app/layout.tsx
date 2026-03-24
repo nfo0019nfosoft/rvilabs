@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Ubuntu } from "next/font/google";
 import "./globals.css";
-
+import LayoutWrapper from "@/components/LayoutWrapper";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -21,26 +21,21 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// ✅ SEO Metadata (PRO LEVEL 🔥)
+// ✅ SEO Metadata (FIXED TYPE 🔥)
 export const metadata: Metadata = {
-  title: {
-    default: "RV Innovation Labs",
-    template: "%s | RV Innovation Labs",
-  },
-  description:
-    "RV Innovation Labs delivers AI SEO, scalable software solutions, and digital transformation services for modern businesses.",
-  icons: {
-    icon: "/favicon.ico",
-  },
+  metadataBase: new URL("https://rvilabs.vercel.app"),
+
+  title: "Rvl Labs",
+  description: "Smart Software. Real Impact.",
+
   openGraph: {
-    title: "RV Innovation Labs",
-    description:
-      "AI SEO & scalable software solutions for modern businesses.",
-    url: "https://yourdomain.com", // 👉 change later
-    siteName: "RV Innovation Labs",
+    title: "Rvl Labs",
+    description: "Smart Software. Real Impact.",
+    url: "https://rvilabs.vercel.app",
+    siteName: "Rvl Labs",
     images: [
       {
-        url: "/og-image.png", // 👉 add this image later
+        url: "/og-image.png",
         width: 1200,
         height: 630,
       },
@@ -57,14 +52,20 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        {/* 🔥 FONT AWESOME ADD HERE */}
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        />
+      </head>
+
       <body
         className={`${ubuntu.className} ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Navbar />
-
-        {children}
-
-        <Footer />
+       <LayoutWrapper>
+  {children}
+</LayoutWrapper>
       </body>
     </html>
   );

@@ -1,12 +1,13 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import * as THREE from "three";
+
 import styles from "./page.module.css";
+
+
 
 export default function Home() {
 
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
    const aboutRef = useRef<HTMLDivElement | null>(null);
   const serviceRefs = useRef<(HTMLDivElement | null)[]>([]);
   const storyRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -15,156 +16,7 @@ export default function Home() {
 const aboutRightRef = useRef<HTMLDivElement | null>(null);
 
 
-       /*hero*/ 
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
-    camera.position.z = 11;
-
-    const renderer = new THREE.WebGLRenderer({
-      canvas,
-      alpha: true,
-      antialias: true,
-    });
-
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-    const resize = () => {
-      const w = canvas.clientWidth;
-      const h = canvas.clientHeight;
-      renderer.setSize(w, h, false);
-      camera.aspect = w / h;
-      camera.updateProjectionMatrix();
-    };
-    resize();
-    window.addEventListener("resize", resize);
-
-    /* LIGHT */
-    scene.add(new THREE.AmbientLight(0xffffff, 0.5));
-
-    const light = new THREE.PointLight(0x3b82f6, 3, 50);
-    light.position.set(0, 0, 6);
-    scene.add(light);
-
-    /* CENTER */
-    const center = new THREE.Mesh(
-      new THREE.CircleGeometry(1.7, 64),
-      new THREE.MeshStandardMaterial({ color: 0x050505 })
-    );
-    scene.add(center);
-
-    /* HEXAGON */
-    const polygon = new THREE.Mesh(
-      new THREE.CircleGeometry(0.9, 6),
-      new THREE.MeshStandardMaterial({
-        color: 0x3b82f6,
-        emissive: 0x3b82f6,
-        emissiveIntensity: 1.5,
-      })
-    );
-    polygon.position.z = 0.2;
-    scene.add(polygon);
-
-    /* DASH RING */
-    const group = new THREE.Group();
-    const parts: THREE.Mesh[] = [];
-
-    const radius = 3.3;
-    const count = 28;
-
-    for (let i = 0; i < count; i++) {
-      const angle = (i / count) * Math.PI * 2;
-
-      const box = new THREE.Mesh(
-        new THREE.BoxGeometry(0.35, 0.35, 0.1),
-        new THREE.MeshStandardMaterial({ color: 0x3b82f6 })
-      );
-
-      box.position.set(
-        Math.cos(angle) * radius,
-        Math.sin(angle) * radius,
-        0
-      );
-
-      box.lookAt(0, 0, 0);
-      group.add(box);
-      parts.push(box);
-    }
-
-    scene.add(group);
-
-    /* OUTER RING */
-    const ring = new THREE.Mesh(
-      new THREE.RingGeometry(4, 4.1, 64),
-      new THREE.MeshBasicMaterial({
-        color: 0x06b6d4,
-        transparent: true,
-        opacity: 0.7,
-        side: THREE.DoubleSide,
-      })
-    );
-    scene.add(ring);
-
-    /* SHOOTING DOTS */
-    const dots: THREE.Mesh[] = [];
-
-    const createDot = () => {
-      const dot = new THREE.Mesh(
-        new THREE.SphereGeometry(0.05, 8, 8),
-        new THREE.MeshBasicMaterial({ color: 0x06b6d4 })
-      );
-
-      dot.position.set(0, 0, 0);
-
-      const target = parts[Math.floor(Math.random() * parts.length)];
-
-      const dir = new THREE.Vector3()
-        .subVectors(target.position, dot.position)
-        .normalize();
-
-      (dot as any).target = target;
-      (dot as any).dir = dir;
-
-      scene.add(dot);
-      dots.push(dot);
-    };
-
-    const interval = setInterval(createDot, 150);
-
-    /* ANIMATION */
-    const animate = () => {
-      requestAnimationFrame(animate);
-
-      group.rotation.z += 0.008;
-      polygon.rotation.z -= 0.01;
-      ring.rotation.z += 0.003;
-
-      dots.forEach((d, i) => {
-        d.position.add((d as any).dir.clone().multiplyScalar(0.2));
-
-        if (
-          d.position.distanceTo((d as any).target.position) < 0.3
-        ) {
-          scene.remove(d);
-          dots.splice(i, 1);
-        }
-      });
-
-      renderer.render(scene, camera);
-    };
-
-    animate();
-
-    return () => {
-      window.removeEventListener("resize", resize);
-      clearInterval(interval);
-    };
-
-  }, []);
 
 
 
@@ -189,6 +41,7 @@ useEffect(() => {
   aboutRef.current,
   aboutLeftRef.current,
   aboutRightRef.current,
+  ...document.querySelectorAll(".reveal"),
 ]
     .forEach((el) => el && observer.observe(el));
 
@@ -353,9 +206,24 @@ useEffect(() => {
           </div>
 
           {/* RIGHT 3D */}
-          <div className={styles.right}>
-            <canvas ref={canvasRef} />
-          </div>
+        <div className={styles.right}>
+  <div className={styles.aiFlow}>
+
+    {/* CENTER CORE */}
+    <div className={styles.core}></div>
+
+    {/* FLOATING ICONS */}
+    <i className={`bi bi-hospital ${styles.icon}`}></i>
+    <i className={`bi bi-bank ${styles.icon}`}></i>
+    <i className={`bi bi-cart ${styles.icon}`}></i>
+    <i className={`bi bi-cpu ${styles.icon}`}></i>
+    <i className={`bi bi-cloud ${styles.icon}`}></i>
+    <i className={`bi bi-shield-check ${styles.icon}`}></i>
+    <i className={`bi bi-graph-up ${styles.icon}`}></i>
+
+  </div>
+</div>
+       
         </div>
       </main>
 
@@ -576,6 +444,89 @@ Core capabilities that define how we deliver consistent value, strategic precisi
     </div>
   </div>
 </section>
+
+
+
+
+
+
+
+
+
+
+
+
+<section className={styles.industriesSection}>
+
+  <div className={styles.industriesContainer}>
+
+    <h2 className="reveal">Industries We Serve</h2>
+
+    <div className={styles.industriesGrid}>
+
+      <div className={`${styles.industryCard} reveal`}>
+        <div className={styles.icon}><i className="fas fa-hospital"></i></div>
+        <h3>Healthcare Solutions</h3>
+        <h3>AI-driven healthcare systems and digital transformation solutions.</h3>
+      </div>
+
+      <div className={`${styles.industryCard} reveal`}>
+        <div className={styles.icon}><i className="fas fa-graduation-cap"></i></div>
+        <h3>Education Technology</h3>
+        <h3>Modern e-learning platforms and scalable systems.</h3>
+      </div>
+
+      <div className={`${styles.industryCard} reveal`}>
+        <div className={styles.icon}><i className="fas fa-shopping-cart"></i></div>
+        <h3>E-Commerce & Retail</h3>
+        <h3>High-performance platforms with seamless UX.</h3>
+      </div>
+
+      <div className={`${styles.industryCard} reveal`}>
+        <div className={styles.icon}><i className="fas fa-industry"></i></div>
+        <h3>Manufacturing</h3>
+        <h3>Automation and predictive maintenance systems.</h3>
+      </div>
+
+      <div className={`${styles.industryCard} reveal`}>
+        <div className={styles.icon}><i className="fas fa-cloud"></i></div>
+        <h3>Cloud & SaaS</h3>
+        <h3>Scalable cloud-native applications and SaaS systems.</h3>
+      </div>
+
+      <div className={`${styles.industryCard} reveal`}>
+        <div className={styles.icon}><i className="fas fa-shield-alt"></i></div>
+        <h3>Cybersecurity</h3>
+        <h3>Advanced protection and compliance solutions.</h3>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
