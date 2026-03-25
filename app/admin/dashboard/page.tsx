@@ -55,7 +55,7 @@ export default function Dashboard() {
   // 📥 FETCH BLOGS
   const fetchBlogs = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/blogs", {
+     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/blogs`, {
         headers: getAuthHeaders(),
       });
 
@@ -70,7 +70,7 @@ export default function Dashboard() {
 
   // ➕ ADD BLOG
   const handleAdd = async () => {
-    await fetch("http://localhost:5000/api/blogs", {
+   await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/blogs`, {
       method: "POST",
       headers: getAuthHeaders(),
       body: JSON.stringify({ title, content, image }),
@@ -89,26 +89,26 @@ export default function Dashboard() {
   };
 
   // 💾 UPDATE
-  const handleUpdate = async () => {
-    await fetch(`http://localhost:5000/api/blogs/${editId}`, {
-      method: "PUT",
-      headers: getAuthHeaders(),
-      body: JSON.stringify({ title, content, image }),
-    });
+const handleUpdate = async () => {
+  await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/blogs/${editId}`, {
+    method: "PUT",
+    headers: getAuthHeaders(),
+    body: JSON.stringify({ title, content, image }),
+  });
 
-    resetForm();
-    fetchBlogs();
-  };
+  resetForm();
+  fetchBlogs();
+};
 
-  // 🗑️ DELETE
-  const handleDelete = async (id: string) => {
-    await fetch(`http://localhost:5000/api/blogs/${id}`, {
-      method: "DELETE",
-      headers: getAuthHeaders(),
-    });
+// 🗑️ DELETE
+const handleDelete = async (id: string) => {
+  await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/blogs/${id}`, {
+    method: "DELETE",
+    headers: getAuthHeaders(),
+  });
 
-    fetchBlogs();
-  };
+  fetchBlogs();
+};
 
   const resetForm = () => {
     setEditId(null);

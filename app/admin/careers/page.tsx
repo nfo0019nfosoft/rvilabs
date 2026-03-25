@@ -20,7 +20,7 @@ export default function AdminCareersPage() {
 
   const fetchData = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/careers");
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/careers`);
       const result = await res.json();
       setData(result);
     } catch (error) {
@@ -51,7 +51,7 @@ export default function AdminCareersPage() {
             <p><b>Message:</b> {item.message}</p>
 
             <a
-              href={`http://localhost:5000/uploads/${item.resume}`}
+             href={`${process.env.NEXT_PUBLIC_API_URL}/uploads/${item.resume}`}
               target="_blank"
               className={styles.btn}
             >

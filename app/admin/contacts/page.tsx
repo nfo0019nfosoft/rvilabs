@@ -10,7 +10,7 @@ export default function ContactsPage() {
 
   // ✅ Fetch data
   useEffect(() => {
-    fetch("http://localhost:5000/api/contact")
+  fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/contact`)
       .then((res) => res.json())
       .then((data) => {
         setContacts(data);
@@ -22,7 +22,7 @@ export default function ContactsPage() {
   const deleteContact = async (id: string) => {
     if (!confirm("Are you sure?")) return;
 
-    await fetch(`http://localhost:5000/api/contact/${id}`, {
+    await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/contact/${id}`, {
       method: "DELETE",
     });
 
