@@ -1,4 +1,5 @@
-    "use client";
+
+"use client"
 import "./admin.css";
 import Link from "next/link";
 import { useEffect } from "react";
@@ -11,17 +12,31 @@ export default function AdminLayout({
 }) {
   const router = useRouter();
   const path = usePathname();
-
   useEffect(() => {
-    const isAdmin = localStorage.getItem("admin");
-    if (!isAdmin) {
-      router.push("/admin/login");
+    try {
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+        router.replace("/admin/login");
+        return;
+      }
+
+      const payload = JSON.parse(atob(token.split(".")[1]));
+
+      if (payload.exp * 1000 < Date.now()) {
+        localStorage.removeItem("token");
+        router.replace("/admin/login");
+      }
+
+    } catch {
+      localStorage.removeItem("token");
+      router.replace("/admin/login");
     }
-  }, []);
+  }, [router, path]); // ✅ IMPORTANT
 
   return (
     <div style={{ display: "flex", minHeight: "100vh" }}>
-      
+
       {/* 🔥 Sidebar */}
       <div
         style={{
@@ -35,7 +50,7 @@ export default function AdminLayout({
         <h2 style={{ marginBottom: "20px" }}>⚡ Admin Panel</h2>
 
         <nav style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-          
+
           <Link
             href="/admin/dashboard"
             style={{
@@ -49,6 +64,30 @@ export default function AdminLayout({
           >
             📄 Blogs
           </Link>
+
+
+
+
+          <Link
+            href="/admin/careers"
+            style={{
+              padding: "10px 15px",
+              borderRadius: "8px",
+              textDecoration: "none",
+              color: path === "/admin/careers" ? "#00d4ff" : "white",
+              background: path === "/admin/careers" ? "#111a2f" : "transparent",
+              transition: "0.3s",
+            }}
+          >
+            💼 Careers
+          </Link>
+
+
+
+
+
+
+
 
           <Link
             href="/admin/contacts"
@@ -68,8 +107,8 @@ export default function AdminLayout({
         {/* 🔥 Logout */}
         <button
           onClick={() => {
-            localStorage.removeItem("admin");
-            router.push("/admin/login");
+            localStorage.removeItem("token"); // ✅ NOT "admin"
+            router.replace("/admin/login");
           }}
           style={{
             marginTop: "30px",
