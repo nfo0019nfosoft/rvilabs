@@ -12,21 +12,22 @@ export default function Dashboard() {
   const [loadingAuth, setLoadingAuth] = useState(true);
 
   const [title, setTitle] = useState("");
+  const [slug, setSlug] = useState("");
+  const [description, setDescription] = useState("");
   const [content, setContent] = useState("");
   const [image, setImage] = useState("");
 
-  // 🔥 AUTH HEADER HELPER (MAIN FIX)
+  const generateSlug = (text: string) =>
+    text.toLowerCase().replace(/ /g, "-").replace(/[^\w-]+/g, "");
+
   const getAuthHeaders = () => {
     const token = localStorage.getItem("token");
-    console.log("TOKEN USED:", token);
-
     return {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     };
   };
 
-  // 🔐 AUTH CHECK
   useEffect(() => {
     try {
       const token = localStorage.getItem("token");
@@ -46,81 +47,92 @@ export default function Dashboard() {
 
       fetchBlogs();
       setLoadingAuth(false);
-    } catch (err) {
+    } catch {
       localStorage.removeItem("token");
       router.replace("/admin/login");
     }
   }, [router]);
 
-  // 📥 FETCH BLOGS
   const fetchBlogs = async () => {
     try {
-     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/blogs`, {
-        headers: getAuthHeaders(),
-      });
-
-      if (!res.ok) throw new Error("Unauthorized");
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/blogs`,
+        { headers: getAuthHeaders() }
+      );
 
       const data = await res.json();
       setBlogs(data);
-    } catch (err) {
+    } catch {
       router.replace("/admin/login");
     }
   };
 
-  // ➕ ADD BLOG
   const handleAdd = async () => {
-   await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/blogs`, {
+    await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/blogs`, {
       method: "POST",
       headers: getAuthHeaders(),
-      body: JSON.stringify({ title, content, image }),
+      body: JSON.stringify({
+        title,
+        slug,
+        description,
+        content,
+        image: image || "/default-blog.jpg",
+      }),
     });
 
     resetForm();
     fetchBlogs();
   };
 
-  // ✏️ EDIT
+  // ✅ FIXED EDIT
   const handleEdit = (blog: any) => {
     setEditId(blog._id);
-    setTitle(blog.title);
-    setContent(blog.content);
+    setTitle(blog.title || "");
+    setSlug(blog.slug || "");
+    setDescription(blog.description || "");
+    setContent(blog.content || "");
     setImage(blog.image || "");
   };
 
-  // 💾 UPDATE
-const handleUpdate = async () => {
-  await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/blogs/${editId}`, {
-    method: "PUT",
-    headers: getAuthHeaders(),
-    body: JSON.stringify({ title, content, image }),
-  });
+  const handleUpdate = async () => {
+    await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/blogs/${editId}`,
+      {
+        method: "PUT",
+        headers: getAuthHeaders(),
+        body: JSON.stringify({
+          title,
+          slug,
+          description,
+          content,
+          image: image || "/default-blog.jpg",
+        }),
+      }
+    );
 
-  resetForm();
-  fetchBlogs();
-};
+    resetForm();
+    fetchBlogs();
+  };
 
-// 🗑️ DELETE
-const handleDelete = async (id: string) => {
-  await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/blogs/${id}`, {
-    method: "DELETE",
-    headers: getAuthHeaders(),
-  });
+  const handleDelete = async (id: string) => {
+    await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/blogs/${id}`,
+      {
+        method: "DELETE",
+        headers: getAuthHeaders(),
+      }
+    );
 
-  fetchBlogs();
-};
+    fetchBlogs();
+  };
 
   const resetForm = () => {
     setEditId(null);
     setTitle("");
+    setSlug("");
+    setDescription("");
     setContent("");
     setImage("");
-  };
-
-  // 🚪 LOGOUT
-  const logout = () => {
-    localStorage.removeItem("token");
-    router.replace("/admin/login");
   };
 
   if (loadingAuth) {
@@ -129,27 +141,41 @@ const handleDelete = async (id: string) => {
 
   return (
     <div className="admin-layout">
-    
-
       <main className="content">
         <h1>📄 Blog Manager</h1>
 
+        {/* FORM */}
         <div className="form">
           <input
             placeholder="Title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            value={title || ""}
+            onChange={(e) => {
+              setTitle(e.target.value);
+              setSlug(generateSlug(e.target.value));
+            }}
+          />
+
+          <input
+            placeholder="Slug"
+            value={slug || ""}
+            onChange={(e) => setSlug(e.target.value)}
+          />
+
+          <input
+            placeholder="Short Description"
+            value={description || ""}
+            onChange={(e) => setDescription(e.target.value)}
           />
 
           <textarea
             placeholder="Content"
-            value={content}
+            value={content || ""}
             onChange={(e) => setContent(e.target.value)}
           />
 
           <input
             placeholder="Image URL"
-            value={image}
+            value={image || ""}
             onChange={(e) => setImage(e.target.value)}
           />
 
@@ -164,15 +190,17 @@ const handleDelete = async (id: string) => {
           )}
         </div>
 
+        {/* BLOG LIST */}
         <div className="grid">
           {blogs.map((blog) => (
             <div key={blog._id} className="card">
-              {blog.image && (
-                <img src={blog.image} className="blog-img" />
-              )}
+              <img
+                src={blog.image || "/default-blog.jpg"}
+                className="blog-img"
+              />
 
               <h3>{blog.title}</h3>
-              <p>{blog.content}</p>
+              <p>{blog.description}</p>
 
               <div className="btns">
                 <button
@@ -181,6 +209,7 @@ const handleDelete = async (id: string) => {
                 >
                   Edit
                 </button>
+
                 <button
                   className="btn delete"
                   onClick={() => handleDelete(blog._id)}

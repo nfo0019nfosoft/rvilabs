@@ -1,33 +1,50 @@
-async function getBlog(slug: string) {
-  const res = await fetch(`http://localhost:5000/api/blogs/${slug}`, {
-    cache: "no-store",
-  });
+"use client";
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch blog");
-  }
+import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
+import "@/styles/blogDetails.css";
+import ReactMarkdown from "react-markdown";
 
-  return res.json();
-}
+export default function BlogDetails() {
+  const params = useParams();
+  const slug = params.slug as string;
 
-export default async function BlogPost({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  const blog = await getBlog(params.slug);
+  const [blog, setBlog] = useState<any>(null);
+
+  useEffect(() => {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/blogs/${slug}`)
+      .then((res) => res.json())
+      .then((data) => setBlog(data));
+  }, [slug]);
+
+  if (!blog) return <p className="loading">Loading...</p>;
 
   return (
-    <div style={{ padding: "40px" }}>
-      <h1>{blog.title}</h1>
+    <div className="blog-details">
 
-      <p style={{ color: "gray" }}>
-        {blog.date} • {blog.author}
-      </p>
-
-      <div style={{ marginTop: "20px" }}>
-        {blog.content}
+      {/* 🔥 HERO */}
+      <div className="hero">
+        <img
+          src={
+            blog.image
+              ? blog.image.startsWith("http")
+                ? blog.image
+                : `${process.env.NEXT_PUBLIC_API_URL}/uploads/${blog.image}`
+              : "/default-blog.jpg"
+          }
+        />
+        <div className="overlay">
+          <h1>{blog.title}</h1>
+          <p>{blog.description}</p>
+        </div>
       </div>
+
+      {/* 📖 CONTENT */}
+     
+<div className="content">
+  <ReactMarkdown>{blog.content}</ReactMarkdown>
+</div>
+
     </div>
   );
 }
