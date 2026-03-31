@@ -22,17 +22,23 @@ const geistMono = Geist_Mono({
 });
 
 // ✅ SEO Metadata (FIXED TYPE 🔥)
+
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://rvilabs.vercel.app"),
 
-  title: "Rvl Labs",
+  title: {
+    default: "RvI Labs",
+    template: "%s | Rv Innovations Labs",
+  },
+
   description: "Smart Software. Real Impact.",
 
   openGraph: {
-    title: "Rvl Labs",
+    title: "RvI Labs",
     description: "Smart Software. Real Impact.",
     url: "https://rvilabs.vercel.app",
-    siteName: "Rvl Labs",
+    siteName: "Rv Innovations Labs",
     images: [
       {
         url: "/og-image.png",
@@ -43,7 +49,6 @@ export const metadata: Metadata = {
     type: "website",
   },
 };
-
 // ✅ Layout
 export default function RootLayout({
   children,
