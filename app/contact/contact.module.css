@@ -537,3 +537,54 @@
     font-size: 0.95rem;
   }
 }
+
+
+/* 🔥 FIX SELECTED ROW (important) */
+.react-tel-input .country.highlight {
+  background: #3b82f6 !important;
+  color: #fff !important;
+}
+
+/* 🔥 FIX SELECTED TEXT INSIDE */
+.react-tel-input .country.highlight .dial-code {
+  color: #fff !important;
+}
+
+/* 🔥 REMOVE GREY STRIP ISSUE */
+.react-tel-input .country {
+  background: transparent !important;
+}
+
+/* 🔥 FORCE TEXT VISIBILITY */
+.react-tel-input .country .dial-code {
+  color: #cbd5f5 !important;
+}
+
+/* 🔥 ACTIVE (CLICKED) ITEM */
+.react-tel-input .country:active {
+  background: #3b82f6 !important;
+  color: #fff !important;
+}
+/* 🌍 PHONE INPUT GLOBAL FIX */
+.react-tel-input .country-list {
+  background: #020617 !important;
+  color: #fff !important;
+}
+
+.react-tel-input .country {
+  background: transparent !important;
+  color: #fff !important;
+}
+
+.react-tel-input .country:hover {
+  background: rgba(59,130,246,0.3) !important;
+}
+
+.react-tel-input .country.highlight {
+  background: #3b82f6 !important;
+  color: #fff !important;
+}
+
+.react-tel-input .country .dial-code {
+  color: #cbd5f5 !important;
+}

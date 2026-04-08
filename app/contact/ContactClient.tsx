@@ -8,6 +8,8 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { useState, useEffect } from "react";
 import { Mail, MapPin } from "lucide-react";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 
 export default function ContactPage() {
 
@@ -32,52 +34,46 @@ export default function ContactPage() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  // 🔥 FINAL HANDLE SUBMIT
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // 🔥 Country code check
-    if (!form.countryCode.startsWith("+")) {
-      alert("Invalid country code ❌");
+    // 📱 CLEAN PHONE
+    const cleanPhone = form.phone.replace(/\D/g, "");
+
+    if (cleanPhone.length < 6 || cleanPhone.length > 15) {
+      alert("Invalid phone number ❌");
       return;
     }
 
-    // 🔥 Phone number only digits
-    if (!/^\d+$/.test(form.phone)) {
-      alert("Phone number should contain only digits ❌");
+    // ✅ EMAIL VALIDATION
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(form.email)) {
+      alert("Invalid email ❌");
       return;
     }
 
-    // 🔥 Length validation
-    if (form.phone.length < 8 || form.phone.length > 12) {
-      alert("Invalid phone number length ❌");
-      return;
-    }
+    // 🚫 BLOCK PERSONAL EMAILS
+    const blockedDomains = ["gmail.com", "yahoo.com", "outlook.com"];
+    const domain = form.email.split("@")[1];
 
-    // 🔥 India specific check
-    if (form.countryCode === "+91" && form.phone.length !== 10) {
-      alert("Indian number must be 10 digits ❌");
-      return;
-    }
-
-    // 🔥 US specific check
-    if (form.countryCode === "+1" && form.phone.length !== 10) {
-      alert("US number must be 10 digits ❌");
-      return;
-    }
-
-    // 🔥 Company email validation
-    if (!form.email.includes("@") || form.email.endsWith("@gmail.com")) {
-      alert("Please use company email only ❌");
+    if (blockedDomains.includes(domain)) {
+      alert("Use company email only ❌");
       return;
     }
 
     try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/contact`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/contact`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify(form)
+        body: JSON.stringify({
+          ...form,
+          phone: cleanPhone,
+          fullPhone: form.countryCode + cleanPhone // 🔥 best practice
+        })
       });
 
       if (res.ok) {
@@ -98,6 +94,7 @@ export default function ContactPage() {
       alert("Something went wrong ❌");
     }
   };
+
 
   const toggle = (index: number) => {
     setActive(active === index ? null : index);
@@ -303,31 +300,32 @@ export default function ContactPage() {
                 onChange={handleChange}
                 placeholder="Company Name"
               />
-
-              {/* 🔥 Phone split into 2 boxes */}
-              <div style={{ display: "flex", gap: "10px" }}>
-                <input
-                  type="text"
-                  name="countryCode"
-                  value={form.countryCode}
-                  onChange={handleChange}
-                  placeholder="+91"
-                  style={{ width: "30%" }}
-                />
-
-                <input
-                  type="text"
-                  name="phone"
-                  value={form.phone}
-                  onChange={(e) => {
-                    const value = e.target.value.replace(/\D/g, ""); // only digits
-                    setForm({ ...form, phone: value });
-                  }}
-                  placeholder="Phone Number"
-                  style={{ width: "70%" }}
-                />
-              </div>
-
+              {/* 🔥 PHONE INPUT WITH FLAGS */}
+              <PhoneInput
+                country={"in"}
+                value={form.phone}
+                onChange={(phone, country: any) => {
+                  setForm({
+                    ...form,
+                    phone,
+                    countryCode: "+" + country.dialCode
+                  });
+                }}
+                inputStyle={{
+                  width: "100%",
+                  background: "rgba(255,255,255,0.05)",
+                  color: "#fff",
+                  border: "1px solid rgba(59,130,246,0.4)",
+                  borderRadius: "6px"
+                }}
+                buttonStyle={{
+                  background: "rgba(255,255,255,0.05)",
+                  border: "1px solid rgba(59,130,246,0.4)"
+                }}
+                containerStyle={{
+                  width: "100%"
+                }}
+              />
               <textarea
                 name="message"
                 value={form.message}
